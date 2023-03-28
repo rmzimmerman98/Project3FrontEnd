@@ -12,9 +12,8 @@ const App = () => {
   //-----------------------------------
   //              NEW BREWERY
   //-----------------------------------
-  const getBrewery = () => {
-    axios
-      .get("https://api.openbrewerydb.org/v1/breweries").then((response) => {
+  const getBreweries = () => {
+    axios.get("https://api.openbrewerydb.org/v1/breweries").then((response) => {
         setBreweries(response.data),
         (err) => console.log(err)
       })
@@ -76,7 +75,7 @@ const App = () => {
           return (
             <>
               <div id="newCard">
-                <Brewery brewery={Brewery} />
+                <Brewery brewery={brewery} />
                 <div id="buttons">
                   <Edit brewery={brewery} handleEdit={handleEdit} />
                   <button
