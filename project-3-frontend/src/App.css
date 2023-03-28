@@ -36,3 +36,122 @@
     transform: rotate(360deg);
   }
 }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+#logo{
+  width: 200px;
+  position: relative;
+  left: 50px;
+  top: 30px;
+
+
+}
+body{
+  background-image: url(/public/bckgrnd.png);
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  margin: 0 auto;
+
+}
+h5{
+  margin: 5px;
+}
+nav{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+#navUl{
+  margin-right: 50px;
+  display: flex;
+
+}
+#navItem{
+  cursor: pointer;
+  list-style: none;
+  margin: 20px;
+  color: #2f4265;
+  font-size: 20px;
+}
+.summary{
+  font-size: 28px;
+}
+#footer{
+  display: flex;
+  justify-content: space-around;
+  padding: 30px 0;
+}
+footer{
+  background-color: #2f4265;
+  color: #fff1ed;
+}
+#contact{
+margin-top: 2%;
+padding-top: 2%;
+}
+#card{
+  background-color: rgba(97,108,134, 0.4);
+  width: 30%;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+#line{
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: center;
+}
+#newCard{
+  background-color: rgba(97,108,134, 0.4);
+  width: 31%;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0px 0px 10px rgb(103, 103, 103);
+  border: 5px solid rgba(255, 255, 255, 0.8);
+  
+}
+#animalimg{
+  width: 100%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+#cardLayout{
+display: flex;
+align-items: center;
+}
+#name{
+  width: 50%;
+  color: white;
+}
+#info{
+  width: 50%;
+  background-color: rgba(97,108,134, 0.4);
+}
+#buttons{
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}
+#display{
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
