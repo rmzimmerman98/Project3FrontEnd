@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
@@ -57,7 +56,7 @@ const App = () => {
       });
   };
   useEffect(() => {
-    getBreweries();
+    getBrewery();
   }, []);
   return (
     <>
