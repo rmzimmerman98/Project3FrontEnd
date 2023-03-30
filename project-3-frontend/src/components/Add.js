@@ -14,47 +14,38 @@ const Add = (props) => {
 
   return (
     <>
-      <div>
+    <div class='dropdown'>
+        <button class='dropbtn' id="navItem">Add Brewery</button>
+        <div class='dropdown-content'>
         <form onSubmit={handleSubmit}>
-          <label id="line" htmlFor="name">
-            Name:
-          </label>
+          <label id="line" htmlFor="name">Name:</label>
           <input type="text" name="name" onChange={handleChange} />
           <br />
           <br />
-          <label id="line" htmlFor="brewery_type">
-            Brewery Type:
-          </label>
+          <label id="line" htmlFor="name">Type:</label>
           <input type="text" name="brewery_type" onChange={handleChange} />
           <br />
           <br />
-          <label id="line" htmlFor="street">
-            Street:
-          </label>
+          <label id="line" htmlFor="name">Address:</label>
           <input type="text" name="street" onChange={handleChange} />
           <br />
           <br />
-          <label id="line" htmlFor="city">
-            City:
-          </label>
+          <label id="line" htmlFor="name">City:</label>
           <input type="text" name="city" onChange={handleChange} />
           <br />
           <br />
-          <label id="line" htmlFor="state">
-            State:
-          </label>
+          <label id="line" htmlFor="name">State:</label>
           <input type="text" name="state" onChange={handleChange} />
           <br />
-          <br />
-          <label id="line" htmlFor="website_url">
-            Website:
-          </label>
+          <br />          
+          <label id="line" htmlFor="name">Website:</label>
           <input type="text" name="website_url" onChange={handleChange} />
           <br />
           <br />
           <input type="submit" />
         </form>
-      </div>
+        </div>
+        </div>
     </>
   );
 };
