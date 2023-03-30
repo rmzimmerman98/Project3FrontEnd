@@ -1,4 +1,6 @@
+import React from "react";
 import { useState } from "react";
+import axios from "axios";
 
 const Edit = (props) => {
   const [brewery, setBrewery] = useState({ ...props.brewery });
@@ -14,14 +16,12 @@ const Edit = (props) => {
 
   return (
     <>
-      <details>
-        <summary>Edit Brewery</summary>
-        <form onSubmit={handleSubmit}>
+        <form id="editForm" onSubmit={handleSubmit}>
           <label htmlFor="name">Name:</label>
           <input type="text" name="name" onChange={handleChange} value={brewery.name}/>
           <br />
           <br />
-          <label htmlFor="name">Brewery Type:</label>
+          <label htmlFor="name">Type:</label>
           <input type="text" name="brewery_type" onChange={handleChange} value={brewery.brewery_type}/>
           <br />
           <br />
@@ -41,9 +41,10 @@ const Edit = (props) => {
           <input type="text" name="website_url" onChange={handleChange} value={brewery.website_url}/>
           <br />
           <br />
-          <input type="submit" />
+          <input id="editBtn" type="submit"/>
+          <button id="editBtn" onClick={() => { props.toggleEdit() }}>Cancel</button>
+          <button id="editBtn" onClick={() => { props.handleDelete(props.brewery) }}>Delete</button>
         </form>
-      </details>
     </>
   );
 };

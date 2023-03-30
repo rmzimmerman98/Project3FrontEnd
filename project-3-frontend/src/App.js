@@ -1,23 +1,25 @@
-import logo from "./logo.svg";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import Brewery from "./components/Brewery";
 import Add from "./components/Add";
-import Edit from "./components/Edit";
 
 const App = () => {
   // State Variables
   const [breweries, setBreweries] = useState([]);
-  //-----------------------------------
-  //              NEW BREWERY
-  //-----------------------------------
+  const [hideBreweries, setHideBreweries]= useState(false)
+  const [hideImage, setHideImage] = useState(true)
+  const [addBrewery, setAddBrewery] = useState(false)
+
+
+  
+//-----------------------------------
+//              NEW BREWERY
+//-----------------------------------
   const getBreweries = () => {
     axios.get("https://api.openbrewerydb.org/v1/breweries").then((response) => {
-        setBreweries(response.data),
-        (err) => console.log(err)
+        setBreweries(response.data);
       })
-      .catch((error) => console.log(error));
   };
   const handleCreate = (data) => {
     axios.post("http://localhost:3000/breweries", data).then((response) => {
@@ -26,9 +28,9 @@ const App = () => {
       setBreweries(newBreweries);
     });
   };
-  //-----------------------------------
-  //              DELETE BREWERY
-  //-----------------------------------
+//-----------------------------------
+//              DELETE BREWERY
+//-----------------------------------
 
   const handleDelete = (deletedBrewery) => {
     axios
@@ -41,9 +43,9 @@ const App = () => {
         setBreweries(newBreweries);
       });
   };
-  //-----------------------------------
-  //              UPDATE BREWERY
-  //-----------------------------------
+//-----------------------------------
+//              UPDATE BREWERY
+//-----------------------------------
   const handleEdit = (data) => {
     axios
       .put("http://localhost:3000/breweries/" + data._id, data)
@@ -55,54 +57,93 @@ const App = () => {
         setBreweries(newBreweries);
       });
   };
+
+
+//-----------------------------------
+//          CONDITIONAL RENDERING
+//-----------------------------------
+  const showBreweries = () => {
+    setHideBreweries(true)
+    setHideImage(false)
+    setAddBrewery(false)
+  }
+  const home = () => {
+    setHideBreweries(false)
+    setHideImage(true)
+    setAddBrewery(false)
+  }
+  const add = () => {
+    setHideBreweries(false)
+    setHideImage(false)
+    setAddBrewery(true)
+  }
+  
+
   useEffect(() => {
     getBreweries();
   }, []);
   return (
     <>
       <nav id="nav">
-        <img id="logo" src="/.png" alt="" />
+        <img id="logo" src="/logo.png" alt="" />
         <ul id="navUl">
-          <li id="navItem">Home</li>
+          <li onClick={add}><Add handleCreate={handleCreate}/></li>
+          <li id="navItem" onClick={home}>Home</li>
           <li id="navItem">About</li>
-          <li id="navItem">Breweries</li>
+          <li id="navItem" onClick={showBreweries}>Breweries</li>
           <li id="navItem">Contact</li>
         </ul>
       </nav>
-      <Add handleCreate={handleCreate} />
+
       <div id="display">
         {breweries.map((brewery) => {
           return (
-            <>
-              <div id="newCard">
-                <Brewery brewery={brewery} />
-                <div id="buttons">
-                  <Edit brewery={brewery} handleEdit={handleEdit} />
-                  <button
-                    onClick={() => {
-                      handleDelete(brewery);
-                    }}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </>
+                hideBreweries
+                ? <Brewery brewery={brewery} />
+                : <></>
           );
         })}
       </div>
+      <div class="displayImage"> 
+              {hideImage 
+              ? 
+              <div>
+                <img id="homeImage" src="logo.png"/>
+
+              <div id="typeImage">
+                <div id="separateImage">
+                  <img id="breweryImage" src="micro.png"/>
+                  <h1 id="typeText">Mirco Breweries</h1>
+                </div>
+                <div id="separateImage">
+                  <img id="breweryImage" src="regional.png"/>
+                  <h1 id="typeText">Regional Breweries</h1>
+                </div>
+                <div id="separateImage">
+                  <img id="breweryImage" src="macro.png"/>
+                  <h1 id="typeText">Marco Breweries</h1>
+                </div>
+              </div>
+              <div id="about">
+                <h1 id="aboutTitle">About US</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas enim leo, tempor non vestibulum non, placerat sed sem. Curabitur sit amet turpis vitae urna faucibus convallis. Nullam eget diam ex. Suspendisse cursus varius felis id vestibulum. Mauris euismod maximus nunc, at eleifend ipsum feugiat vel. Nullam nec nibh pretium, aliquam urna sed, tincidunt metus. Donec vehicula non nulla accumsan porttitor. Maecenas ultricies, mauris nec tristique efficitur, enim nulla porttitor sem, eget cursus turpis eros sed sapien. Donec volutpat quam turpis, id eleifend risus gravida imperdiet. Aliquam tempus ipsum a enim egestas ultricies.</p>
+                <p>Phasellus viverra erat nec convallis dapibus. Proin iaculis augue id mauris tempus imperdiet. Cras orci risus, fermentum vitae tincidunt vitae, facilisis in tortor. Suspendisse dictum malesuada elit, vel rhoncus enim lacinia et. Nam blandit aliquet velit. Maecenas tristique tempor est eget faucibus. Suspendisse a pharetra est. Ut elementum velit vitae pulvinar aliquet.</p>
+              </div>
+              </div>
+              : "" }   
+      </div>
       <footer>
-        <h1 id="contact">Contact</h1>
         <div id="footer">
+        <h1 id="contact">Contact</h1>
           <div id="col">
-            <p>BREWERY</p>
-            <p>1156 West Cesar Chavez</p>
+            <p>RaYo Barrels Brewery Library</p>
+            <p>1105 Claire ave,</p>
             <p>Austin, TX 78703</p>
           </div>
           <div id="col">
             <p>T: 512-961-6519</p>
             <p>F: 866-272-5060</p>
-            <p>Email: austinpetsalive@email.com</p>
+            <p>Email: rayobarrels@email.com</p>
           </div>
           <div id="col">
             <p>Subscribe to our Newsletter</p>
