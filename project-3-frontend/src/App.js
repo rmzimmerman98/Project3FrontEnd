@@ -133,6 +133,7 @@ const handleFilter = (type) => {
 
   return (
     <>
+{/* NAV BAR SECTION */}
       <nav id="nav">
         <img id="logo" src="/logo.png" alt="" />
         <ul id="navUl">
@@ -147,6 +148,7 @@ const handleFilter = (type) => {
         <button disabled={breweries.length < 50} onClick={handleNextPage}>Next</button>
       </div>
       </nav>
+{/* BREWERIES CONDITIONAL RENDERING SECTION */}
       <div id="display">
         {breweries.map((brewery) => {
           return (
@@ -164,6 +166,7 @@ const handleFilter = (type) => {
           );
         })}
       </div>
+{/* HOME PAGE SECTION */}
       <div class="displayImage"> 
               {hideImage 
               ? 
@@ -174,7 +177,7 @@ const handleFilter = (type) => {
                 <div>
                   <button id="breweryType" onClick={() => handleFilter('micro')}><div id="separateImage">
                     <img id="breweryImage" src="micro.png"/>
-                    <h1 id="typeText">Mirco Breweries</h1>
+                    <h1 id="typeText">Micro Breweries</h1>
                   </div></button>
                   <button id="breweryType" onClick={() => handleFilter('brewpub')}><div id="separateImage">
                     <img id="breweryImage" src="regional.png"/>
@@ -182,26 +185,11 @@ const handleFilter = (type) => {
                   </div></button>
                   <button id="breweryType" onClick={() => handleFilter('large')}><div id="separateImage">
                     <img id="breweryImage" src="macro.png"/>
-                    <h1 id="typeText">Marco Breweries</h1>
+                    <h1 id="typeText">Macro Breweries</h1>
                   </div></button>
                 </div>
                 </div>
-
-                {/* Just the images of the three types of Breweries */}
-                {/* <div id="typeImage">
-                  <div id="separateImage">
-                    <img id="breweryImage" src="micro.png"/>
-                    <h1 id="typeText">Mirco Breweries</h1>
-                  </div>
-                  <div id="separateImage">
-                    <img id="breweryImage" src="regional.png"/>
-                    <h1 id="typeText">Regional Breweries</h1>
-                  </div>
-                  <div id="separateImage">
-                    <img id="breweryImage" src="macro.png"/>
-                    <h1 id="typeText">Marco Breweries</h1>
-                  </div>
-                </div> */}
+{/* ABOUT SECTION */}
               <div id="about">
                 <h1 id="aboutTitle">About US</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas enim leo, tempor non vestibulum non, placerat sed sem. Curabitur sit amet turpis vitae urna faucibus convallis. Nullam eget diam ex. Suspendisse cursus varius felis id vestibulum. Mauris euismod maximus nunc, at eleifend ipsum feugiat vel. Nullam nec nibh pretium, aliquam urna sed, tincidunt metus. Donec vehicula non nulla accumsan porttitor. Maecenas ultricies, mauris nec tristique efficitur, enim nulla porttitor sem, eget cursus turpis eros sed sapien. Donec volutpat quam turpis, id eleifend risus gravida imperdiet. Aliquam tempus ipsum a enim egestas ultricies.</p>
@@ -210,6 +198,7 @@ const handleFilter = (type) => {
               </div>
               : "" }   
       </div>
+{/* FOOTER SECTION */}
       <footer>
         <div >
           <h1 id="contact">Contact</h1>
