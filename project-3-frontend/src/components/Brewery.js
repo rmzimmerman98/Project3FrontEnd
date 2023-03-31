@@ -1,41 +1,23 @@
-import React from "react";
-import { useState } from "react";
 import Edit from "./Edit";
-
+import axios from "axios";
+import { useState } from "react";
 const Brewery = (props) => {
-  const [edit, setEdit] = useState(false)
-
-  const toggleEdit = () => {
-    setEdit(!edit)
-  }
 
   return (
-    <div id="newCard">
-      {edit 
-      ? <Edit 
-          toggleEdit={toggleEdit}
-          setEdit={setEdit}
-          brewery={props.brewery}
-          handleDelete={props.handleDelete}
-          getBreweries={props.getBreweries}
-          />
-      :
-      <div key={props.brewery._id} id="cardLayout">
+
+      <div id="cardLayout">
         <div id="name">
           <div id="nameText">
-          <h1>{props.brewery.name}</h1>
+          <h2>{props.brewery.name}</h2>
           </div>
         </div>
         <div id="info">
-          <h4>Type: {props.brewery.brewery_type}</h4><hr/>
-          <h4>{props.brewery.street}</h4><hr/>
-          <h4>{props.brewery.city}, {props.brewery.state}</h4><hr/>
-          <h6>Website: {props.brewery.website_url}</h6>
-          <button id="editBtn" onClick={() => { toggleEdit() }}>EDIT</button>
+          <p>Type: {props.brewery.brewery_type}</p><hr/>
+          <p>{props.brewery.city}, {props.brewery.state}</p><hr/>
+          <a id="website" href={props.brewery.website_url}>{props.brewery.website_url && props.brewery.website_url.replace(/^https?:\/\//i, '')}</a>
         </div>
       </div>
-        }
-    </div>
+
   );
 };
 
