@@ -71,8 +71,14 @@ a {
   text-decoration: none;
   color: #595959;
   cursor: pointer;
-}
 
+}
+#website{
+  text-align: center;
+  margin: 0 auto;
+  padding: 10px;
+  cursor: pointer;
+}
 h5{
   margin: 5px;
 }
@@ -283,7 +289,11 @@ width: 100%;
   cursor: pointer;
   border: 1px solid white;
 }
-
+#breweryType{
+  background-color: transparent;
+  width: 30%;
+  border: none;
+}
 #editForm{
   padding: 2%;
   text-align: center;
@@ -298,4 +308,7 @@ width: 100%;
 }
 #aboutTitle{
 text-align: center;
+}
+#test{
+  text-align: center;
 }

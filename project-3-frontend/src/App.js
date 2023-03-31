@@ -10,8 +10,11 @@ const App = () => {
   const [breweries, setBreweries] = useState([]);
   const [hideBreweries, setHideBreweries]= useState(false)
   const [hideImage, setHideImage] = useState(true)
+  const [breweryTypes, setBreweryTypes] = useState([]);
+  const [filteredBreweries, setFilteredBreweries] = useState(breweries);
+  const [types, setTypes] = useState(["micro", "brewpub", "large" ]);
   const [hideEdit, setHideEdit] = useState(false)
-
+  const [currentPage, setCurrentPage] = useState(1);
 
 
   
@@ -58,7 +61,6 @@ const handleEdit = (data) => {
 
 
 
-
 //-----------------------------------
 //          CONDITIONAL RENDERING
 //-----------------------------------
@@ -82,11 +84,53 @@ const handleEdit = (data) => {
     setHideImage(false)
     setHideEdit(true)
   }
+
+//-----------------------------------
+//          Pagination
+//-----------------------------------
+  function handleNextPage() {
+    setCurrentPage(currentPage + 1);
+  }
+
+  function handlePrevPage() {
+    setCurrentPage(currentPage - 1);
+  }
   
+  useEffect(() => {
+    const resultsPerPage = 50;
+    const url = `https://api.openbrewerydb.org/v1/breweries?page=${currentPage}&per_page=${resultsPerPage}`;
+
+    axios.get(url)
+      .then(response => {
+        setBreweries(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching breweries:', error);
+      });
+  }, [currentPage]);
+
 
   useEffect(() => {
-    getBreweries();
+    const page_number = 1;
+    const results_per_page = 72;
+    const url = `https://api.openbrewerydb.org/v1/breweries?page=${page_number}&per_page=${results_per_page}`;
+  
+    axios.get(url)
+      .then(response => {
+        setBreweries(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching breweries:', error);
+      });
   }, []);
+//-----------------------------------
+//           FILTER BREWERY
+//-----------------------------------
+const handleFilter = (type) => {
+  const filteredBreweries = breweries.filter(brewery => brewery.brewery_type === type);
+  setFilteredBreweries(filteredBreweries);
+}
+
   return (
     <>
       <nav id="nav">
@@ -98,20 +142,25 @@ const handleEdit = (data) => {
           <li id="navItem" onClick={showBreweries}>Breweries</li>
           <li id="navItem"><a href="#contact">Contact</a></li>
         </ul>
+        <div className="pagination">
+        <button disabled={currentPage === 1} onClick={handlePrevPage}>Previous</button>
+        <button disabled={breweries.length < 50} onClick={handleNextPage}>Next</button>
+      </div>
       </nav>
-
       <div id="display">
         {breweries.map((brewery) => {
           return (
-                hideBreweries
-                ? <div id="newCard">
+              hideBreweries
+              ? <>
+                  <div id="newCard">
                     <Brewery brewery={brewery} />
                     <div id="buttons">
                       <Edit brewery={brewery} handleEdit={handleEdit} />
                       <button id="editBtn" onClick={() => {handleDelete(brewery)}}>Remove</button>
                     </div>
                   </div>
-                : <></>
+                </>
+              : <></>
           );
         })}
       </div>
@@ -120,20 +169,39 @@ const handleEdit = (data) => {
               ? 
               <div>
                 <img id="homeImage" src="logo.png"/>
-              <div id="typeImage">
-                <div id="separateImage">
-                  <img id="breweryImage" src="micro.png"/>
-                  <h1 id="typeText">Mirco Breweries</h1>
+                <div id="test">
+                <h1 id="typeText" >Breweries by Size</h1>
+                <div>
+                  <button id="breweryType" onClick={() => handleFilter('micro')}><div id="separateImage">
+                    <img id="breweryImage" src="micro.png"/>
+                    <h1 id="typeText">Mirco Breweries</h1>
+                  </div></button>
+                  <button id="breweryType" onClick={() => handleFilter('brewpub')}><div id="separateImage">
+                    <img id="breweryImage" src="regional.png"/>
+                    <h1 id="typeText">Brewpub</h1>
+                  </div></button>
+                  <button id="breweryType" onClick={() => handleFilter('large')}><div id="separateImage">
+                    <img id="breweryImage" src="macro.png"/>
+                    <h1 id="typeText">Marco Breweries</h1>
+                  </div></button>
                 </div>
-                <div id="separateImage">
-                  <img id="breweryImage" src="regional.png"/>
-                  <h1 id="typeText">Regional Breweries</h1>
                 </div>
-                <div id="separateImage">
-                  <img id="breweryImage" src="macro.png"/>
-                  <h1 id="typeText">Marco Breweries</h1>
-                </div>
-              </div>
+
+                {/* Just the images of the three types of Breweries */}
+                {/* <div id="typeImage">
+                  <div id="separateImage">
+                    <img id="breweryImage" src="micro.png"/>
+                    <h1 id="typeText">Mirco Breweries</h1>
+                  </div>
+                  <div id="separateImage">
+                    <img id="breweryImage" src="regional.png"/>
+                    <h1 id="typeText">Regional Breweries</h1>
+                  </div>
+                  <div id="separateImage">
+                    <img id="breweryImage" src="macro.png"/>
+                    <h1 id="typeText">Marco Breweries</h1>
+                  </div>
+                </div> */}
               <div id="about">
                 <h1 id="aboutTitle">About US</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas enim leo, tempor non vestibulum non, placerat sed sem. Curabitur sit amet turpis vitae urna faucibus convallis. Nullam eget diam ex. Suspendisse cursus varius felis id vestibulum. Mauris euismod maximus nunc, at eleifend ipsum feugiat vel. Nullam nec nibh pretium, aliquam urna sed, tincidunt metus. Donec vehicula non nulla accumsan porttitor. Maecenas ultricies, mauris nec tristique efficitur, enim nulla porttitor sem, eget cursus turpis eros sed sapien. Donec volutpat quam turpis, id eleifend risus gravida imperdiet. Aliquam tempus ipsum a enim egestas ultricies.</p>
