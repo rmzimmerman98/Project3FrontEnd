@@ -21,6 +21,7 @@ const App = () => {
   const getBreweries = () => {
     axios.get("https://api.openbrewerydb.org/v1/breweries").then((response) => {
         setBreweries(response.data);
+        console.log('Debugging: getBreweries working');
       })
   };
   const handleCreate = (data) => {
@@ -28,16 +29,29 @@ const App = () => {
       console.log(response);
       let newBreweries = [...breweries, response.data];
       setBreweries(newBreweries);
+      console.log('Debugging: handleCreate working');
     });
   };
 //-----------------------------------
 //              DELETE BREWERY
 //-----------------------------------
 
+<<<<<<< HEAD
 const handleDelete = (deletedBrewery) => {
   axios.delete("http://localhost:3000/breweries/" + deletedBrewery._id).then((response) => {
       let newBreweries = breweries.filter((brewery) => {
         return brewery._id !== deletedBrewery._id;
+=======
+  const handleDelete = (deletedBrewery) => {
+    axios
+      .delete("http://localhost:3000/breweries/" + deletedBrewery._id)
+      .then((response) => {
+        let newBreweries = breweries.filter((brewery) => {
+          return brewery._id !== deletedBrewery._id;
+        });
+        setBreweries(newBreweries);
+        console.log('Debugging: handleDelete working');
+>>>>>>> a860c19efb5d5a4ff008d6d73d4d1d5f4d320f26
       });
       setBreweries(newBreweries);
     });
@@ -46,6 +60,7 @@ const handleDelete = (deletedBrewery) => {
 //-----------------------------------
 //              UPDATE BREWERY
 //-----------------------------------
+<<<<<<< HEAD
 
 const handleEdit = (data) => {
   axios.put(`http://localhost:3000/breweries/` + data._id, data).then((response) => {
@@ -57,6 +72,20 @@ const handleEdit = (data) => {
 }
 
 
+=======
+  const handleEdit = (data) => {
+    axios
+      .put("http://localhost:3000/breweries/" + data._id, data)
+      .then((response) => {
+        console.log(response);
+        let newBreweries = breweries.map((brewery) => {
+          return brewery._id !== data._id ? brewery : data;
+        });
+        setBreweries(newBreweries);
+        console.log('Debugging: handleEdit working');
+      });
+  };
+>>>>>>> a860c19efb5d5a4ff008d6d73d4d1d5f4d320f26
 
 
 //-----------------------------------
@@ -108,7 +137,11 @@ const handleEdit = (data) => {
                     <Brewery brewery={brewery} />
                     <div id="buttons">
                       <Edit brewery={brewery} handleEdit={handleEdit} />
+<<<<<<< HEAD
                       <button id="editBtn" onClick={() => {handleDelete(brewery)}}>Remove</button>
+=======
+                      <button id="editBtn" onClick={() => {handleDelete(brewery);}}>Remove</button>
+>>>>>>> a860c19efb5d5a4ff008d6d73d4d1d5f4d320f26
                     </div>
                   </div>
                 : <></>

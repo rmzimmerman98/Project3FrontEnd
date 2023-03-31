@@ -137,7 +137,7 @@ footer{
 /*---------------------------------*/
 #card{
   background-color: rgba(97,108,134, 0.4);
-  width: 30%;
+  width: 100%;
   margin: 0 auto;
   border-radius: 20px;
 }
@@ -163,13 +163,25 @@ width: 100%;
 }
 #editBtn{
   width: 100px;
+<<<<<<< HEAD
   height: 40px;
   margin: 2px 30%;
   border-radius: 20px;
+=======
+  height: 30px;
+  border-radius: 15px;
+>>>>>>> a860c19efb5d5a4ff008d6d73d4d1d5f4d320f26
   border: 1px solid white;
   background-color: #599596;
   color: white;
   text-align: center;
+<<<<<<< HEAD
+=======
+}
+details summary {
+  list-style: none;
+
+>>>>>>> a860c19efb5d5a4ff008d6d73d4d1d5f4d320f26
 }
 #name{
   width: 30%;
@@ -183,7 +195,7 @@ width: 100%;
 }
 #info{
   padding-left: 2%;
-  width: 70%;
+  width: 60%;
   color: white;
   background-color: rgba(97,108,134, 0.2);
   border-top-right-radius: 15px;
@@ -193,7 +205,13 @@ width: 100%;
   width: 70%;
   display: flex;
   justify-content: space-around;
-  margin: 10px;
+  margin-left: 35%;
+}
+#website{
+  text-decoration: none;
+  color: #2f4265;
+  padding: 10px;
+  cursor: pointer;
 }
 #editButtons{
   display: flex;
