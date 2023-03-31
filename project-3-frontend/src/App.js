@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import Brewery from "./components/Brewery";
 import Add from "./components/Add";
+import Edit from "./components/Edit";
 
 const App = () => {
   // State Variables
@@ -19,6 +20,7 @@ const App = () => {
   const getBreweries = () => {
     axios.get("https://api.openbrewerydb.org/v1/breweries").then((response) => {
         setBreweries(response.data);
+        console.log('Debugging: getBreweries working');
       })
   };
   const handleCreate = (data) => {
@@ -26,6 +28,7 @@ const App = () => {
       console.log(response);
       let newBreweries = [...breweries, response.data];
       setBreweries(newBreweries);
+      console.log('Debugging: handleCreate working');
     });
   };
 //-----------------------------------
@@ -39,8 +42,8 @@ const App = () => {
         let newBreweries = breweries.filter((brewery) => {
           return brewery._id !== deletedBrewery._id;
         });
-
         setBreweries(newBreweries);
+        console.log('Debugging: handleDelete working');
       });
   };
 //-----------------------------------
@@ -55,6 +58,7 @@ const App = () => {
           return brewery._id !== data._id ? brewery : data;
         });
         setBreweries(newBreweries);
+        console.log('Debugging: handleEdit working');
       });
   };
 
@@ -99,7 +103,13 @@ const App = () => {
         {breweries.map((brewery) => {
           return (
                 hideBreweries
-                ? <Brewery brewery={brewery} />
+                ? <div id="newCard">
+                    <Brewery brewery={brewery} />
+                    <div id="buttons">
+                      <Edit brewery={brewery} handleEdit={handleEdit} />
+                      <button id="editBtn" onClick={() => {handleDelete(brewery);}}>Remove</button>
+                    </div>
+                  </div>
                 : <></>
           );
         })}

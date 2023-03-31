@@ -1,9 +1,8 @@
-import React from "react";
 import { useState } from "react";
-import axios from "axios";
 
 const Edit = (props) => {
   const [brewery, setBrewery] = useState({ ...props.brewery });
+  const [editForm, setEditForm] = useState(false)
 
   const handleChange = (event) => {
     setBrewery({ ...brewery, [event.target.name]: event.target.value });
@@ -14,14 +13,22 @@ const Edit = (props) => {
     props.handleEdit(brewery);
   };
 
+  const showEdit = () => {
+    setEditForm(true)
+  }
+
+
   return (
     <>
-        <form id="editForm" onSubmit={handleSubmit}>
+      <details>
+        <summary id="editBtn">Edit</summary>
+        <form onSubmit={handleSubmit}>
+          <div id="editForm">
           <label htmlFor="name">Name:</label>
           <input type="text" name="name" onChange={handleChange} value={brewery.name}/>
           <br />
           <br />
-          <label htmlFor="name">Type:</label>
+          <label htmlFor="name">Brewery Type:</label>
           <input type="text" name="brewery_type" onChange={handleChange} value={brewery.brewery_type}/>
           <br />
           <br />
@@ -41,10 +48,10 @@ const Edit = (props) => {
           <input type="text" name="website_url" onChange={handleChange} value={brewery.website_url}/>
           <br />
           <br />
-          <input id="editBtn" type="submit"/>
-          <button id="editBtn" onClick={() => { props.toggleEdit() }}>Cancel</button>
-          <button id="editBtn" onClick={() => { props.handleDelete(props.brewery) }}>Delete</button>
+          <input type="submit" />
+          </div>
         </form>
+      </details>
     </>
   );
 };
