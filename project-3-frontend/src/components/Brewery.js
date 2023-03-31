@@ -17,7 +17,9 @@ const Brewery = (props) => {
           </h4>
           <h4>{props.brewery.country}</h4>
           <hr />
-          <a id="website" href={props.brewery.website_url}>{props.brewery.website_url && props.brewery.website_url.replace(/^https?:\/\//i, '')}</a>
+          <div id="website">
+            <a href={props.brewery.website_url}>{props.brewery.website_url && props.brewery.website_url.replace(/^https?:\/\//i, '')}</a>
+          </div>
         </div>
       </div>
     </div>
