@@ -48,6 +48,11 @@ code {
 *{
   scroll-behavior: smooth;
 }
+#app{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 body {
   min-height: 100vh;
   background-image: url(/public/mountains.jpg);
@@ -83,7 +88,7 @@ h5{
   margin: 5px;
 }
 p{
-  width: 70%;
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -121,23 +126,25 @@ nav{
 /*        FOOTER ITEMS             */
 /*---------------------------------*/
 footer{
-
   background: linear-gradient(90deg, rgba(125,185,186,1) 0%, rgba(89,149,150,1) 75%, rgba(184,223,222,1) 100%);
   color: white;
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
+  margin-top: auto;
+  line-height: 1em;
 }
 #footer{
+font-size: 12px;
   display: flex;
   justify-content: space-around;
-  margin-bottom: 1%;
 }
 #contact{
   text-align: center;
   color: white;
-  margin-top: 2%;
-  padding-top: 2%;
+}
+#col{
+  width: 25%;
+  text-align: center;
 }
 /*---------------------------------*/
 /* BREWERY CARD */
@@ -171,7 +178,7 @@ width: 100%;
 #editBtn{
   width: 100px;
   height: 40px;
-  margin: 2px 30%;
+  margin: auto;
   border-radius: 20px;
   border: 1px solid white;
   background-color: #599596;
@@ -199,11 +206,16 @@ width: 100%;
 #buttons{
   width: 70%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-content: center;
   margin: 10px;
+}
+details{
+margin-left: 20%;
 }
 #editButtons{
   display: flex;
+  align-self: center;
   margin: 2%;
   width: 30%;
 }
@@ -216,6 +228,9 @@ width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+}
+summary{
+  list-style: none;
 }
 /*---------------------------------*/
 /* Drop Down Menu */
@@ -283,7 +298,7 @@ width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 70%;
 
 }
 /*---------------------------------*/
@@ -293,8 +308,6 @@ width: 100%;
   width: 40%;
   margin-left: 30%;
   margin-bottom: 10%;
-  backdrop-filter: blur(10px);
-  border-radius: 400px;
 }
 #typeImage{
 display: flex;
@@ -321,13 +334,14 @@ width: 100%;
 }
 #breweryType{
   background-color: transparent;
-  width: 30%;
+  width: 33.3%;
   border: none;
 }
 #editForm{
-  padding: 2%;
   text-align: center;
   margin-bottom: 2%;
+  margin-left: 20%;
+  
 }
 #about{
   text-align: justify;
@@ -342,4 +356,3 @@ text-align: center;
 #test{
   text-align: center;
 }
-

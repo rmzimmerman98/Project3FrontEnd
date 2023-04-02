@@ -1,4 +1,7 @@
+
+
 const Brewery = (props) => {
+  console.log(props.brewery);
   return (
     <div>
       <div id="cardLayout">

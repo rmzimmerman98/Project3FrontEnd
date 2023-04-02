@@ -14,16 +14,16 @@ const Add = (props) => {
 
   return (
     <>
-    <div class='dropdown'>
-        <button class='dropbtn' id="navItem">Add Brewery</button>
-        <div class='dropdown-content'>
+    <div className='dropdown'>
+        <button className='dropbtn' id="navItem">Add Brewery</button>
+        <div className='dropdown-content'>
         <form onSubmit={handleSubmit}>
-          <div id="formField">
-          <label id="line" htmlFor="name">Name:</label>
-          <input id="input" type="text" name="name" onChange={handleChange} placeholder="Brewery's Name"/>
+          <div id="formField" >
+          <label id="line"   htmlFor="name">Name:</label>
+          <input id="input"  type="text" name="name" onChange={handleChange} placeholder="Brewery's Name"/>
           </div>
           <div id="formField">
-          <label id="line" htmlFor="name">Type:</label>
+          <label id="line"  htmlFor="name">Type:</label>
           <input id="input" type="text" name="brewery_type" onChange={handleChange} placeholder="Brewery's Type"/>
           </div>
           <div id="formField">
