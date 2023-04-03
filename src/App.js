@@ -3,13 +3,15 @@ import axios from "axios";
 import "./App.css";
 import Brewery from "./components/Brewery";
 import Add from "./components/Add";
+import Edit from "./components/Edit";
 
 const App = () => {
   // State Variables
   const [breweries, setBreweries] = useState([]);
   const [hideBreweries, setHideBreweries]= useState(false)
   const [hideImage, setHideImage] = useState(true)
-  const [addBrewery, setAddBrewery] = useState(false)
+  const [hideEdit, setHideEdit] = useState(false)
+
 
 
   
@@ -22,7 +24,7 @@ const App = () => {
       })
   };
   const handleCreate = (data) => {
-    axios.post("http://localhost:3000/breweries", data).then((response) => {
+    axios.post("https://stormy-ravine-91702.herokuapp.com/breweries", data).then((response) => {
       console.log(response);
       let newBreweries = [...breweries, response.data];
       setBreweries(newBreweries);
@@ -32,31 +34,29 @@ const App = () => {
 //              DELETE BREWERY
 //-----------------------------------
 
-  const handleDelete = (deletedBrewery) => {
-    axios
-      .delete("http://localhost:3000/breweries/" + deletedBrewery._id)
-      .then((response) => {
-        let newBreweries = breweries.filter((brewery) => {
-          return brewery._id !== deletedBrewery._id;
-        });
-
-        setBreweries(newBreweries);
+const handleDelete = (deletedBrewery) => {
+  axios.delete("https://stormy-ravine-91702.herokuapp.com/breweries" + deletedBrewery._id).then((response) => {
+      let newBreweries = breweries.filter((brewery) => {
+        return brewery._id !== deletedBrewery._id;
       });
-  };
+      setBreweries(newBreweries);
+    });
+};
+
 //-----------------------------------
 //              UPDATE BREWERY
 //-----------------------------------
-  const handleEdit = (data) => {
-    axios
-      .put("http://localhost:3000/breweries/" + data._id, data)
-      .then((response) => {
-        console.log(response);
-        let newBreweries = breweries.map((brewery) => {
-          return brewery._id !== data._id ? brewery : data;
-        });
-        setBreweries(newBreweries);
-      });
-  };
+
+const handleEdit = (data) => {
+  axios.put(`https://stormy-ravine-91702.herokuapp.com/breweries` + data._id, data).then((response) => {
+    let newBreweries = breweries.map((brewery) => {
+      return brewery._id !== data._id ? brewery : data
+    })
+    setBreweries(newBreweries)
+  })
+}
+
+
 
 
 //-----------------------------------
@@ -65,17 +65,22 @@ const App = () => {
   const showBreweries = () => {
     setHideBreweries(true)
     setHideImage(false)
-    setAddBrewery(false)
+    setHideEdit(false)
   }
   const home = () => {
     setHideBreweries(false)
     setHideImage(true)
-    setAddBrewery(false)
+    setHideEdit(false)
   }
   const add = () => {
     setHideBreweries(false)
     setHideImage(false)
-    setAddBrewery(true)
+    setHideEdit(false)
+  }
+  const showEdit = () => {
+    setHideBreweries(false)
+    setHideImage(false)
+    setHideEdit(true)
   }
   
 
@@ -88,10 +93,10 @@ const App = () => {
         <img id="logo" src="/logo.png" alt="" />
         <ul id="navUl">
           <li onClick={add}><Add handleCreate={handleCreate}/></li>
-          <li id="navItem" onClick={home}>Home</li>
-          <li id="navItem">About</li>
+          <li id="navItem" onClick={home}><a href="#">Home</a></li>
+          <li id="navItem"><a href="#about">About</a></li>
           <li id="navItem" onClick={showBreweries}>Breweries</li>
-          <li id="navItem">Contact</li>
+          <li id="navItem"><a href="#contact">Contact</a></li>
         </ul>
       </nav>
 
@@ -99,7 +104,13 @@ const App = () => {
         {breweries.map((brewery) => {
           return (
                 hideBreweries
-                ? <Brewery brewery={brewery} />
+                ? <div id="newCard">
+                    <Brewery brewery={brewery} />
+                    <div id="buttons">
+                      <Edit brewery={brewery} handleEdit={handleEdit} />
+                      <button id="editBtn" onClick={() => {handleDelete(brewery)}}>Remove</button>
+                    </div>
+                  </div>
                 : <></>
           );
         })}
@@ -109,11 +120,10 @@ const App = () => {
               ? 
               <div>
                 <img id="homeImage" src="logo.png"/>
-
               <div id="typeImage">
                 <div id="separateImage">
                   <img id="breweryImage" src="micro.png"/>
-                  <h1 id="typeText">Mirco Breweries</h1>
+                  <h1 id="typeText">Micro Breweries</h1>
                 </div>
                 <div id="separateImage">
                   <img id="breweryImage" src="regional.png"/>
@@ -133,25 +143,28 @@ const App = () => {
               : "" }   
       </div>
       <footer>
-        <div id="footer">
-        <h1 id="contact">Contact</h1>
-          <div id="col">
-            <p>RaYo Barrels Brewery Library</p>
-            <p>1105 Claire ave,</p>
-            <p>Austin, TX 78703</p>
-          </div>
-          <div id="col">
-            <p>T: 512-961-6519</p>
-            <p>F: 866-272-5060</p>
-            <p>Email: rayobarrels@email.com</p>
-          </div>
-          <div id="col">
-            <p>Subscribe to our Newsletter</p>
-            <form>
-              <input type="input" placeholder="Enter your email here" />
-              <input type="submit" />
-            </form>
-          </div>
+        <div >
+          <h1 id="contact">Contact</h1>
+          <dev id="footer">
+            <div id="col">
+              <h5>RaYo Barrels Brewery Library</h5>
+              <p>1105 Claire ave,</p>
+              <p>Austin, TX 78703</p>
+            </div>
+            <div id="col">
+              <p>T: 512-961-6519</p>
+              <p>F: 866-272-5060</p>
+              <p>Email: rayobarrels@email.com</p>
+            </div>
+            <div id="col">
+              <p>Subscribe to our Newsletter</p>
+              <form>
+                <input type="input" placeholder="Enter your email here" />
+                <input type="submit" />
+              </form>
+            </div>
+          </dev>
+          <p id="footer">Youssef Shabo | Randall Zimmereman © 2023</p>
         </div>
       </footer>
     </>

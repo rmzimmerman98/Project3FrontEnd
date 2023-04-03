@@ -36,6 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/*---------------------------------*/
+/*       BODY & OVERALL ITEMS      */
+/*---------------------------------*/
+*{
+  scroll-behavior: smooth;
+}
 body {
   height: 100vh;
   background-image: url(/public/mountains.jpg);
@@ -52,18 +64,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+li{
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #595959;
+  cursor: pointer;
+}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-#logo{
-  width: 110px;
-  position: relative;
-  left: 50px;
-}
 h5{
   margin: 5px;
+}
+p{
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 /*---------------------------------*/
 /* NAV BAR ITEMS */
@@ -79,7 +95,7 @@ nav{
 
 }
 #navUl{
-  margin-right: 50px;
+  margin-right: 100px;
   display: flex;
 
 }
@@ -90,12 +106,25 @@ nav{
   color: #2f4265;
   font-size: 20px;
 }
+#logo{
+  width: 110px;
+  position: relative;
+  left: 100px;
+}
+/*---------------------------------*/
+/*        FOOTER ITEMS             */
+/*---------------------------------*/
+footer{
+  background: linear-gradient(90deg, rgba(125,185,186,1) 0%, rgba(89,149,150,1) 75%, rgba(184,223,222,1) 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
 #footer{
   display: flex;
   justify-content: space-around;
-  padding: 30px 0;
-  background: linear-gradient(90deg, rgba(125,185,186,1) 0%, rgba(89,149,150,1) 75%, rgba(184,223,222,1) 100%);
-  color: white;
+
 }
 #contact{
   text-align: center;
@@ -120,29 +149,30 @@ nav{
 }
 #newCard{
   background-color: rgba(97,108,134, 0.2);
-  width: 31%;
-  margin: 0 auto;
+  width: 30%;
+  margin: 10px auto;
   border-radius: 20px;
-  margin-top: 20px;
   backdrop-filter: blur(10px);
   box-shadow: 0px 0px 10px rgb(103, 103, 103);
-border: 1px solid white;
+  border: 1px solid white;
 }
 #cardLayout{
 display: flex;
 align-items: center;
+width: 100%;
 }
 #editBtn{
   width: 100px;
-  height: 30px;
+  height: 40px;
   margin: 2px 30%;
-  border-radius: 15px;
+  border-radius: 20px;
   border: 1px solid white;
   background-color: #599596;
   color: white;
+  text-align: center;
 }
 #name{
-  width: 40%;
+  width: 30%;
 }
 #nameText{
   color: white;
@@ -150,8 +180,6 @@ align-items: center;
   font-weight: bolder;
   rotate: -90deg;
   font-size: 10px;
-
-
 }
 #info{
   padding-left: 2%;
@@ -167,6 +195,11 @@ align-items: center;
   justify-content: space-around;
   margin: 10px;
 }
+#editButtons{
+  display: flex;
+  margin: 2%;
+  width: 30%;
+}
 #display{
   width: 80%;
   margin-left: auto;
@@ -176,9 +209,6 @@ align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-}
-li{
-  list-style: none;
 }
 /*---------------------------------*/
 /* Drop Down Menu */
@@ -228,7 +258,7 @@ li{
   margin-left: 30%;
   margin-bottom: 10%;
   backdrop-filter: blur(10px);
-border-radius: 250px;
+  border-radius: 250px;
 }
 #typeImage{
 display: flex;
@@ -265,11 +295,6 @@ width: 100%;
   background: linear-gradient(90deg, rgba(125,185,186,1) 0%, rgba(89,149,150,1) 33%, rgba(184,223,222,1) 100%);
   padding: 5% 0;
   margin: 5% 0;
-}
-p{
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
 }
 #aboutTitle{
 text-align: center;
