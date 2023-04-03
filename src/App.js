@@ -194,7 +194,7 @@ const handleEdit = (data) => {
               : "" }   
       </div>
                           {/* MAPBOX SECTION */}
-                          {/* <Map breweries={breweries} />   */}
+                          <Map breweries={breweries} />  
 {/* FOOTER SECTION */}
       <footer>
         <div >
