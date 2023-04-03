@@ -38,7 +38,7 @@ const App = () => {
 //-----------------------------------
 
 const handleDelete = (deletedBrewery) => {
-  axios.delete("http://localhost:3000/breweries/" + deletedBrewery._id).then((response) => {
+  axios.delete("https://stormy-ravine-91702.herokuapp.com/breweries" + deletedBrewery._id).then((response) => {
       let newBreweries = breweries.filter((brewery) => {
         return brewery._id !== deletedBrewery._id;
       });
@@ -51,7 +51,7 @@ const handleDelete = (deletedBrewery) => {
 //-----------------------------------
 
 const handleEdit = (data) => {
-  axios.put(`http://localhost:3000/breweries/` + data._id, data).then((response) => {
+  axios.put(`https://stormy-ravine-91702.herokuapp.com/breweries` + data._id, data).then((response) => {
     let newBreweries = breweries.map((brewery) => {
       return brewery._id !== data._id ? brewery : data
     })
