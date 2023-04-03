@@ -1,21 +1,26 @@
+import React from 'react';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import Brewery from "./components/Brewery";
 import Add from "./components/Add";
 import Edit from "./components/Edit";
+import Filter from "./components/Filter";
+import Map from './components/Map';
+// import 'mapbox-gl/dist/mapbox-gl.css';
+// import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl} from "react-map-gl"; 
+
 
 const App = () => {
   // State Variables
   const [breweries, setBreweries] = useState([]);
   const [hideBreweries, setHideBreweries]= useState(false)
   const [hideImage, setHideImage] = useState(true)
-  const [breweryTypes, setBreweryTypes] = useState([]);
-  const [filteredBreweries, setFilteredBreweries] = useState(breweries);
-  const [types, setTypes] = useState(["micro", "brewpub", "large" ]);
   const [hideEdit, setHideEdit] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
 
+  // const [lng, setLng] = useState(-103.41493817027313)
+  // const [lat, setLat] = useState(20.704031522322648)
 
   
 //-----------------------------------
@@ -112,7 +117,7 @@ const handleEdit = (data) => {
 
   useEffect(() => {
     const page_number = 1;
-    const results_per_page = 72;
+    const results_per_page = 12;
     const url = `https://api.openbrewerydb.org/v1/breweries?page=${page_number}&per_page=${results_per_page}`;
   
     axios.get(url)
@@ -123,16 +128,11 @@ const handleEdit = (data) => {
         console.error('Error fetching breweries:', error);
       });
   }, []);
-//-----------------------------------
-//           FILTER BREWERY
-//-----------------------------------
-const handleFilter = (type) => {
-  const filteredBreweries = breweries.filter(brewery => brewery.brewery_type === type);
-  setFilteredBreweries(filteredBreweries);
-}
+
 
   return (
-    <>
+    <div id="app">
+{/* NAV BAR SECTION */}
       <nav id="nav">
         <img id="logo" src="/logo.png" alt="" />
         <ul id="navUl">
@@ -142,80 +142,66 @@ const handleFilter = (type) => {
           <li id="navItem" onClick={showBreweries}>Breweries</li>
           <li id="navItem"><a href="#contact">Contact</a></li>
         </ul>
-        <div className="pagination">
-        <button disabled={currentPage === 1} onClick={handlePrevPage}>Previous</button>
-        <button disabled={breweries.length < 50} onClick={handleNextPage}>Next</button>
-      </div>
+       
       </nav>
+{/* BREWERIES CONDITIONAL RENDERING SECTION */}
       <div id="display">
-        {breweries.map((brewery) => {
-          return (
-              hideBreweries
-              ? <>
-                  <div id="newCard">
-                    <Brewery brewery={brewery} />
-                    <div id="buttons">
-                      <Edit brewery={brewery} handleEdit={handleEdit} />
-                      <button id="editBtn" onClick={() => {handleDelete(brewery)}}>Remove</button>
-                    </div>
-                  </div>
-                </>
-              : <></>
-          );
-        })}
+        {hideBreweries
+              ?
+              <div id='breweryDispaly'>
+{/* MAPBOX SECTION */}
+              <Map breweries={breweries} />
+              <div id='sidebar'>
+{/* FILTER SECTION */}
+                <Filter breweries={breweries}/>
+{/* PAGINATION SECTION */}
+              <div className="pagination">
+                <button id="nxtBtn" disabled={currentPage === 1} onClick={handlePrevPage}>Previous</button>
+                <button id="nxtBtn"  onClick={handleNextPage}>Next</button>
+              </div>
+{/* CARDS SECTION */}   
+              <div id='test'>    
+              {breweries.map((brewery) => {
+                return (
+                    <>    
+                        <div id="newCard">
+                          <Brewery brewery={brewery} />
+                          <div id="buttons">
+                            <Edit brewery={brewery} handleEdit={handleEdit} />
+                            <button id="editBtn" onClick={() => {handleDelete(brewery)}}>Remove</button>
+                          </div>
+                        </div>
+                    </>)})}
+              </div>
+              </div>
+              </div>: <></>
+          }
       </div>
-      <div class="displayImage"> 
+{/* HOME PAGE SECTION */}
+      <div className="displayImage"> 
               {hideImage 
               ? 
               <div>
                 <img id="homeImage" src="logo.png"/>
-                <div id="test">
-                <h1 id="typeText" >Breweries by Size</h1>
-                <div>
-                  <button id="breweryType" onClick={() => handleFilter('micro')}><div id="separateImage">
-                    <img id="breweryImage" src="micro.png"/>
-                    <h1 id="typeText">Mirco Breweries</h1>
-                  </div></button>
-                  <button id="breweryType" onClick={() => handleFilter('brewpub')}><div id="separateImage">
-                    <img id="breweryImage" src="regional.png"/>
-                    <h1 id="typeText">Brewpub</h1>
-                  </div></button>
-                  <button id="breweryType" onClick={() => handleFilter('large')}><div id="separateImage">
-                    <img id="breweryImage" src="macro.png"/>
-                    <h1 id="typeText">Marco Breweries</h1>
-                  </div></button>
-                </div>
-                </div>
-
-                {/* Just the images of the three types of Breweries */}
-                {/* <div id="typeImage">
-                  <div id="separateImage">
-                    <img id="breweryImage" src="micro.png"/>
-                    <h1 id="typeText">Mirco Breweries</h1>
-                  </div>
-                  <div id="separateImage">
-                    <img id="breweryImage" src="regional.png"/>
-                    <h1 id="typeText">Regional Breweries</h1>
-                  </div>
-                  <div id="separateImage">
-                    <img id="breweryImage" src="macro.png"/>
-                    <h1 id="typeText">Marco Breweries</h1>
-                  </div>
-                </div> */}
+ 
+{/* ABOUT SECTION */}
               <div id="about">
-                <h1 id="aboutTitle">About US</h1>
+                <h1 id="aboutTitle">ABOUT US</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas enim leo, tempor non vestibulum non, placerat sed sem. Curabitur sit amet turpis vitae urna faucibus convallis. Nullam eget diam ex. Suspendisse cursus varius felis id vestibulum. Mauris euismod maximus nunc, at eleifend ipsum feugiat vel. Nullam nec nibh pretium, aliquam urna sed, tincidunt metus. Donec vehicula non nulla accumsan porttitor. Maecenas ultricies, mauris nec tristique efficitur, enim nulla porttitor sem, eget cursus turpis eros sed sapien. Donec volutpat quam turpis, id eleifend risus gravida imperdiet. Aliquam tempus ipsum a enim egestas ultricies.</p>
                 <p>Phasellus viverra erat nec convallis dapibus. Proin iaculis augue id mauris tempus imperdiet. Cras orci risus, fermentum vitae tincidunt vitae, facilisis in tortor. Suspendisse dictum malesuada elit, vel rhoncus enim lacinia et. Nam blandit aliquet velit. Maecenas tristique tempor est eget faucibus. Suspendisse a pharetra est. Ut elementum velit vitae pulvinar aliquet.</p>
               </div>
               </div>
               : "" }   
       </div>
+                          {/* MAPBOX SECTION */}
+                          {/* <Map breweries={breweries} />   */}
+{/* FOOTER SECTION */}
       <footer>
         <div >
-          <h1 id="contact">Contact</h1>
+          <h2 id="contact">CONTACT</h2>
           <dev id="footer">
             <div id="col">
-              <h5>RaYo Barrels Brewery Library</h5>
+              <h3>RaYo Barrels Brewery Library</h3>
               <p>1105 Claire ave,</p>
               <p>Austin, TX 78703</p>
             </div>
@@ -235,7 +221,7 @@ const handleFilter = (type) => {
           <p id="footer">Youssef Shabo | Randall Zimmereman © 2023</p>
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 
