@@ -150,7 +150,7 @@ const handleEdit = (data) => {
               ?
               <div id='breweryDispaly'>
 {/* MAPBOX SECTION */}
-              {/* <Map breweries={breweries} /> */}
+              <Map breweries={breweries} />
               <div id='sidebar'>
 {/* FILTER SECTION */}
                 <Filter breweries={breweries}/>
@@ -194,7 +194,7 @@ const handleEdit = (data) => {
               : "" }   
       </div>
                           {/* MAPBOX SECTION */}
-                          <Map breweries={breweries} />  
+                          {/* <Map breweries={breweries} />   */}
 {/* FOOTER SECTION */}
       <footer>
         <div >
