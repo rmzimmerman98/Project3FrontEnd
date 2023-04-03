@@ -6,8 +6,9 @@ import Brewery from "./components/Brewery";
 import Add from "./components/Add";
 import Edit from "./components/Edit";
 import Filter from "./components/Filter";
-import 'mapbox-gl/dist/mapbox-gl.css';
-import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl} from "react-map-gl"; 
+import Map from './components/Map';
+// import 'mapbox-gl/dist/mapbox-gl.css';
+// import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl} from "react-map-gl"; 
 
 
 const App = () => {
@@ -15,12 +16,11 @@ const App = () => {
   const [breweries, setBreweries] = useState([]);
   const [hideBreweries, setHideBreweries]= useState(false)
   const [hideImage, setHideImage] = useState(true)
- 
   const [hideEdit, setHideEdit] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [lng, setLng] = useState(-103.41493817027313)
-  const [lat, setLat] = useState(20.704031522322648)
+  // const [lng, setLng] = useState(-103.41493817027313)
+  // const [lat, setLat] = useState(20.704031522322648)
 
   
 //-----------------------------------
@@ -117,7 +117,7 @@ const handleEdit = (data) => {
 
   useEffect(() => {
     const page_number = 1;
-    const results_per_page = 72;
+    const results_per_page = 12;
     const url = `https://api.openbrewerydb.org/v1/breweries?page=${page_number}&per_page=${results_per_page}`;
   
     axios.get(url)
@@ -142,29 +142,40 @@ const handleEdit = (data) => {
           <li id="navItem" onClick={showBreweries}>Breweries</li>
           <li id="navItem"><a href="#contact">Contact</a></li>
         </ul>
-        <div className="pagination">
-        <button id="editBtn" disabled={currentPage === 1} onClick={handlePrevPage}>Previous</button>
-        <button id="editBtn" disabled={breweries.length < 50} onClick={handleNextPage}>Next</button>
-      </div>
+       
       </nav>
 {/* BREWERIES CONDITIONAL RENDERING SECTION */}
       <div id="display">
-        {breweries.map((brewery) => {
-          return (
-              hideBreweries
-              ? <>      
-                  <div id="newCard">
-                    <Brewery brewery={brewery} />
-                    <div id="buttons">
-                      <Edit brewery={brewery} handleEdit={handleEdit} />
-                      <button id="editBtn" onClick={() => {handleDelete(brewery)}}>Remove</button>
-                    </div>
-                  </div>
-                  
-                </>
-              : <></>
-          );
-        })}
+        {hideBreweries
+              ?
+              <div id='breweryDispaly'>
+{/* MAPBOX SECTION */}
+              <Map breweries={breweries} />
+              <div id='sidebar'>
+{/* FILTER SECTION */}
+                <Filter breweries={breweries}/>
+{/* PAGINATION SECTION */}
+              <div className="pagination">
+                <button id="nxtBtn" disabled={currentPage === 1} onClick={handlePrevPage}>Previous</button>
+                <button id="nxtBtn"  onClick={handleNextPage}>Next</button>
+              </div>
+{/* CARDS SECTION */}   
+              <div id='test'>    
+              {breweries.map((brewery) => {
+                return (
+                    <>    
+                        <div id="newCard">
+                          <Brewery brewery={brewery} />
+                          <div id="buttons">
+                            <Edit brewery={brewery} handleEdit={handleEdit} />
+                            <button id="editBtn" onClick={() => {handleDelete(brewery)}}>Remove</button>
+                          </div>
+                        </div>
+                    </>)})}
+              </div>
+              </div>
+              </div>: <></>
+          }
       </div>
 {/* HOME PAGE SECTION */}
       <div className="displayImage"> 
@@ -172,37 +183,7 @@ const handleEdit = (data) => {
               ? 
               <div>
                 <img id="homeImage" src="logo.png"/>
-                <Filter/>
-
-{/* MAPBOX SECTION */}
-<div id='map'>
-
-<Map
-mapboxAccessToken='pk.eyJ1IjoieW91c3NlZnNoYWJvIiwiYSI6ImNsZnlsOW14cjBiczkzcm9odWJmemN0ejEifQ.lju6vjKv3aiPNv-IvLNKYw'
-style={{  
-  width: "70%",
-  height: "500px",
-  borderRadius: "20px",
-  marginLeft: "15%",
-  marginTop: "5%"
-}}
-initialViewState={{
-  longitude: lng,
-  latitude: lat,
-}}
-mapStyle="mapbox://styles/youssefshabo/clfymf6eb000101l1xl5w0szn/draft"
->
-<Marker
-longitude={lng}
-latitude={lat}
-/>
-<NavigationControl/>
-<GeolocateControl/>
-<FullscreenControl/>
-</Map>
-</div>
-
-
+ 
 {/* ABOUT SECTION */}
               <div id="about">
                 <h1 id="aboutTitle">ABOUT US</h1>
@@ -212,6 +193,8 @@ latitude={lat}
               </div>
               : "" }   
       </div>
+                          {/* MAPBOX SECTION */}
+                          {/* <Map breweries={breweries} />   */}
 {/* FOOTER SECTION */}
       <footer>
         <div >
