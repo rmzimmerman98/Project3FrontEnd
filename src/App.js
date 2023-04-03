@@ -27,7 +27,7 @@ const App = () => {
       })
   };
   const handleCreate = (data) => {
-    axios.post("http://localhost:3000/breweries", data).then((response) => {
+    axios.post("https://stormy-ravine-91702.herokuapp.com/breweries", data).then((response) => {
       console.log(response);
       let newBreweries = [...breweries, response.data];
       setBreweries(newBreweries);
