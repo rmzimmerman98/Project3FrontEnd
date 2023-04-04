@@ -8,8 +8,8 @@ mapboxgl.accessToken =
 const Map = ({ breweries }) => {
   const mapContainerRef = useRef(null);
 
-  const [lng, setLng] = useState([-100]);
-  const [lat, setLat] = useState([38]);
+  const [lng, setLng] = useState(-100);
+  const [lat, setLat] = useState(38);
   const [zoom, setZoom] = useState(4.5);
 
     // Fetch coordinates from API and update state

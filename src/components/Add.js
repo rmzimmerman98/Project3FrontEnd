@@ -42,6 +42,14 @@ const Add = (props) => {
           <label id="line" htmlFor="name">Website:</label>
           <input id="input" type="text" name="website_url" onChange={handleChange} placeholder="Brewery's Website"/>
           </div>
+          <div id="formField">      
+          <label id="line" htmlFor="name">Longitude:</label>
+          <input id="input" type="number" name="longitude" onChange={handleChange} placeholder="Brewery's longitude"/>
+          </div>
+          <div id="formField">      
+          <label id="line" htmlFor="name">Latitude:</label>
+          <input id="input" type="number" name="latitude" onChange={handleChange} placeholder="Brewery's latitde"/>
+          </div>
           <input id="editBtn" type="submit" />
         </form>
         </div>
