@@ -35,7 +35,7 @@ const handleFilter = (types) => {
                     <img id="breweryImage" src="macro.png"/>
                     <h3 id="typeText">Macro Breweries</h3>
                     </div></button>
-                    <ul>
+                    {/* <ul>
                     {filteredBreweries.length > 0 
                     ? (
                         filteredBreweries.map((brewery, index) => (
@@ -46,7 +46,7 @@ const handleFilter = (types) => {
                         <li key={index}>{brewery.name}</li>
                         ))
                     )}
-                    </ul>
+                    </ul> */}
                 </div>
             </div>
         </>
