@@ -1,11 +1,9 @@
 .map-container {
-  position: sticky;
-  width: 60vw;
+  position: fixed;
+  width: 49vw;
   margin-left: 0vw;
   height: 900px;
-  border-radius: 30px;
-
-
+  box-shadow: 0px 10px 10px rgb(72, 72, 72);
   }
   
   .sidebarStyle {
@@ -16,7 +14,7 @@
     margin: 12px;
     background-color: #404040;
     color: #ffffff;
-    z-index: 1 !important;
+
     padding: 6px;
     font-weight: bold;
   }

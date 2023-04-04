@@ -12,7 +12,7 @@ const Filter = ({breweries}) => {
 //           FILTER BREWERY
 //-----------------------------------
 const handleFilter = (types) => {
-    const filteredBreweries = breweries.filter(brewery => brewery.brewery_type === types).map(filteredBrewery => (<li>{filteredBrewery.name}</li>));
+    const filteredBreweries = breweries.filter(brewery => brewery.brewery_type === types).map(filteredBrewery => (filteredBrewery.name));
     setFilteredBreweries(filteredBreweries);
     console.log(filteredBreweries);
   }
@@ -22,6 +22,7 @@ const handleFilter = (types) => {
         <>
             <div id="filter">
                 <div>
+               
                     <button id="breweryType" onClick={() => handleFilter('micro')}><div id="separateImage">
                     <img id="breweryImage" src="micro.png"/>
                     <h3 id="typeText">Micro Breweries</h3>
@@ -34,6 +35,18 @@ const handleFilter = (types) => {
                     <img id="breweryImage" src="macro.png"/>
                     <h3 id="typeText">Macro Breweries</h3>
                     </div></button>
+                    <ul>
+                    {filteredBreweries.length > 0 
+                    ? (
+                        filteredBreweries.map((brewery, index) => (
+                        <li key={index}>{brewery}</li>
+                        ))
+                    ) : (
+                        breweries.map((brewery, index) => (
+                        <li key={index}>{brewery.name}</li>
+                        ))
+                    )}
+                    </ul>
                 </div>
             </div>
         </>

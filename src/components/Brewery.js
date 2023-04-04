@@ -7,7 +7,7 @@ const Brewery = (props) => {
       <div id="cardLayout">
         <div id="name">
           <div id="nameText">
-            <h3>{props.brewery.name}</h3>
+            <h2>{props.brewery.name}</h2>
           </div>
         </div>
         <div id="info">

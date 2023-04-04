@@ -7,8 +7,7 @@ import Add from "./components/Add";
 import Edit from "./components/Edit";
 import Filter from "./components/Filter";
 import Map from './components/Map';
-// import 'mapbox-gl/dist/mapbox-gl.css';
-// import Map, {FullscreenControl, GeolocateControl, Marker, NavigationControl} from "react-map-gl"; 
+
 
 
 const App = () => {
@@ -19,8 +18,7 @@ const App = () => {
   const [hideEdit, setHideEdit] = useState(false)
   const [currentPage, setCurrentPage] = useState(1);
 
-  // const [lng, setLng] = useState(-103.41493817027313)
-  // const [lat, setLat] = useState(20.704031522322648)
+
 
   
 //-----------------------------------
@@ -38,18 +36,6 @@ const App = () => {
       setBreweries(newBreweries);
     });
   };
-//-----------------------------------
-//              DELETE BREWERY
-//-----------------------------------
-
-const handleDelete = (deletedBrewery) => {
-  axios.delete("https://stormy-ravine-91702.herokuapp.com/breweries" + deletedBrewery._id).then((response) => {
-      let newBreweries = breweries.filter((brewery) => {
-        return brewery._id !== deletedBrewery._id;
-      });
-      setBreweries(newBreweries);
-    });
-};
 
 //-----------------------------------
 //              UPDATE BREWERY
@@ -117,7 +103,7 @@ const handleEdit = (data) => {
 
   useEffect(() => {
     const page_number = 1;
-    const results_per_page = 12;
+    const results_per_page = 48;
     const url = `https://api.openbrewerydb.org/v1/breweries?page=${page_number}&per_page=${results_per_page}`;
   
     axios.get(url)
@@ -152,8 +138,7 @@ const handleEdit = (data) => {
 {/* MAPBOX SECTION */}
               <Map breweries={breweries} />
               <div id='sidebar'>
-{/* FILTER SECTION */}
-                <Filter breweries={breweries}/>
+
 {/* PAGINATION SECTION */}
               <div className="pagination">
                 <button id="nxtBtn" disabled={currentPage === 1} onClick={handlePrevPage}>Previous</button>
@@ -166,10 +151,7 @@ const handleEdit = (data) => {
                     <>    
                         <div id="newCard">
                           <Brewery brewery={brewery} />
-                          <div id="buttons">
-                            <Edit brewery={brewery} handleEdit={handleEdit} />
-                            <button id="editBtn" onClick={() => {handleDelete(brewery)}}>Remove</button>
-                          </div>
+                          <Edit brewery={brewery} handleEdit={handleEdit} />
                         </div>
                     </>)})}
               </div>
@@ -183,7 +165,8 @@ const handleEdit = (data) => {
               ? 
               <div>
                 <img id="homeImage" src="logo.png"/>
- 
+ {/* FILTER SECTION */}
+              <Filter breweries={breweries}/>
 {/* ABOUT SECTION */}
               <div id="about">
                 <h1 id="aboutTitle">ABOUT US</h1>
