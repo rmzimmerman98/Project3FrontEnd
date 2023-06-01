@@ -160,7 +160,7 @@ font-size: 12px;
 }
 #newCard{
   background-color: rgba(97,108,134, 0.2);
-  width: 29%;
+  width: 45%;
   border-top-left-radius: 30px;
   border-bottom-right-radius: 30px;
   backdrop-filter: blur(10px);
