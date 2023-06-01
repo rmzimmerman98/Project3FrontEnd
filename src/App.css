@@ -354,8 +354,9 @@ width: 100%;
 }
 #breweryType{
   background-color: transparent;
-  width: 33.3%;
+  width: 20%;
   border: none;
+  margin: 2.5%;
 }
 
 #about{
@@ -380,7 +381,7 @@ text-align: center;
 #sidebar{
   position: relative;
   right: 0;
-  width: 50vw;
+  width: 34vw;
   margin-right: 0;
   display: flex;
   flex-direction: column;
